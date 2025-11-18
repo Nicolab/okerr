@@ -1,0 +1,18 @@
+[package]
+name = "okerr"
+version = "1.0.0"
+edition = "2024"
+authors = ["Nicolas talle <dev@nicolab.net>"]
+license = "MIT"
+repository = "https://github.com/nicolab/okerr"
+categories = ["rust-patterns", "data-structures"]
+keywords = ["error", "error-handling", "result", "anyhow", "thiserror"]
+description = "Ergonomic result / error handling helpers built on anyhow and thiserror."
+documentation = "https://docs.rs/okerr"
+
+[dependencies]
+thiserror = "2.0"
+anyhow = "1.0"
+
+[dev-dependencies]
+eyre = "0.6"
