@@ -14,9 +14,9 @@ The `okerr` crate is mostly re-exported from `anyhow`, making it 100% compatible
 
 Thanks to `okerr::from_boxed_error`, it's easy to capture and convert `eyre` errors without including `eyre` as a dependency!
 
-All of that, about ten lines of code (very lightweight, no overhead, no cost of abstraction). Fully tested of course!
+All of that in just a few lines of code (very lightweight, no overhead, no abstraction cost). Fully tested, of course!
 
-More idiomatic aliases for clearer code:
+Idiomatic aliases for clearer code:
 
 ```rust
 anyerr!("Oops!"); // Instead of `anyhow!("Oops!")
@@ -50,7 +50,7 @@ let error = okerr::anyerr!("Oops!")
 let result = okerr::wrap_err(result)
 ```
 
-It's very simple, very lightweight (about ten lines of codes in the `okerr` crate), it provides consistency and a better DX. 100% compatible with `anyhow` and `thiserror`, convert easily error from a boxed error (like eyre::Report and others).
+It's very simple, very lightweight (just a few lines of code in the `okerr` crate), it provides consistency and a excellent DX. 100% compatible with `anyhow` and `thiserror`, convert easily error from a boxed error (like eyre::Report and others).
 
 ## Related docs
 
@@ -160,7 +160,7 @@ cargo test
 
 ## Thanks
 
-Thanks to [@dtolnay](https://github.com/dtolnay), the author of [anyhow](https://github.com/dtolnay/anyhow) and [thiserror](https://github.com/dtolnay/thiserror), who provided 2 great ways to handle errors with Rust. 👍
+Thanks to [@dtolnay](https://github.com/dtolnay), the author of [anyhow](https://github.com/dtolnay/anyhow) and [thiserror](https://github.com/dtolnay/thiserror), for providing two great ways to handle errors in Rust. 👍
 
 ## LICENSE
 

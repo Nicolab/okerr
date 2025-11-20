@@ -12,6 +12,7 @@
 //! - It also provides a `err!` macro that is a shorthand for `Err(anyhow::anyhow!(...))` or `Err(okerr::anyerr!(...))`.
 //! - It also provides a `fail!` macro that is `anyhow::bail!`.
 //! - It also provides a `anyerr!` macro that is `anyhow::anyhow!`.
+//! - All "anyhow" is also available as "okerr" aliases (Context, ensure!, format_err!, etc.).
 //!
 //! # Example
 //!
@@ -100,9 +101,47 @@
 //! ```
 //!
 //! It's very simple, very lightweight
-//! (about ten lines of codes in the `okerr` crate),
-//! it provides consistency and a better DX. 100% compatible with `anyhow` and `thiserror`, convert easily error from a boxed error (like eyre::Report and others).
-pub use anyhow::*;
+//! (just a few lines of code in the `okerr` crate), no overhead, no abstraction cost.
+//! `okerr` provides consistency and a excellent DX. 100% compatible with `anyhow` and `thiserror`, convert easily error from a boxed error (like eyre::Report and others).
+
+pub use anyhow::{
+    // -- Structs
+
+    // iterator over the error's source chain
+    Chain,
+
+    // -- Traits
+
+    // adds .context() and .with_context() to Results
+    Context,
+
+    // generic, context-aware error type
+    Error,
+
+    // -- Functions
+
+    // equivalent to Ok::<_, anyhow::Error>(value)
+    Ok,
+
+    // -- Type aliases
+
+    // shorthand for Result<T, Error>
+    Result,
+
+    // -- Macros
+
+    // construct an Error from a message or another error
+    anyhow,
+
+    // early-return with an error
+    bail,
+
+    // check a condition and bail if false
+    ensure,
+
+    // alias for the anyhow! macro (like anyerr!)
+    format_err,
+};
 
 /// Sugar for re-exporting thiserror::Error.
 /// `okerr::derive::Error` is a re-export of `thiserror::Error`.
@@ -112,25 +151,25 @@ pub mod derive {
     pub use thiserror::Error;
 }
 
-/// Same as `anyhow!`.
+/// Same as `anyhow!` (and its alias: `format_err!`).
 /// - [Docs.rs: macro anyhow!](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html)
 #[macro_export]
 macro_rules! anyerr {
-    ($($tt:tt)*) => { anyhow::anyhow!($($tt)*) };
+    ($($tt:tt)*) => { $crate::anyhow!($($tt)*) };
 }
 
 /// Shorthand for `Err(anyerr!(...))` or `Err(anyhow!(...))`.
 /// - [Docs.rs: macro anyhow!](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html)
 #[macro_export]
 macro_rules! err {
-    ($($tt:tt)*) => { Err(anyhow::anyhow!($($tt)*)) };
+    ($($tt:tt)*) => { Err($crate::anyhow!($($tt)*)) };
 }
 
 /// Same as `anyhow::bail!`.
 /// - [Docs.rs: macro bail!](https://docs.rs/anyhow/latest/anyhow/macro.bail.html)
 #[macro_export]
 macro_rules! fail {
-    ($($tt:tt)*) => { anyhow::bail!($($tt)*) };
+    ($($tt:tt)*) => { $crate::bail!($($tt)*) };
 }
 
 /// Convert a boxed error into an okerr/anyhow Error.
