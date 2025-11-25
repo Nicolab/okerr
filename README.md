@@ -112,6 +112,8 @@ fn main() {
 
 ### Thiserror like
 
+> NOTE: requieres the `thiserror` dependency to be added to your `Cargo.toml` (`cargo add thiserror`).
+
 With `okerr::derive::Error`:
 
 ```rust

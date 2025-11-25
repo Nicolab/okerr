@@ -5,10 +5,11 @@
 //! - [Docs.rs: anyhow](https://docs.rs/anyhow/latest/anyhow/)
 //! - [Docs.rs: thiserror](https://docs.rs/thiserror/latest/thiserror/)
 //!
-//! This crate is a re-export of `anyhow` and `thiserror`.
+//! This crate is a re-export of `anyhow` and aliase of`thiserror`.
 //!
 //! - It provides a `Result` type that is `anyhow::Result`
-//! and `okerr::derive::Error` is a re-export of `thiserror::Error`.
+//! and `okerr::derive::Error` is an alias of `thiserror::Error`.
+//!     - NOTE: `okerr::derive::Error` requieres the `thiserror` dependency to be added to your `Cargo.toml` (`cargo add thiserror`).
 //! - It also provides a `err!` macro that is a shorthand for `Err(anyhow::anyhow!(...))` or `Err(okerr::anyerr!(...))`.
 //! - It also provides a `fail!` macro that is `anyhow::bail!`.
 //! - It also provides a `anyerr!` macro that is `anyhow::anyhow!`.
@@ -143,9 +144,10 @@ pub use anyhow::{
     format_err,
 };
 
-/// Sugar for re-exporting thiserror::Error.
-/// `okerr::derive::Error` is a re-export of `thiserror::Error`.
+/// Sugar for thiserror::Error.
+/// `okerr::derive::Error` is an alias of `thiserror::Error`.
 /// - https://docs.rs/thiserror/latest/thiserror/
+/// NOTE: requieres the `thiserror` dependency.
 pub mod derive {
     // Re-export thiserror::Error
     pub use thiserror::Error;
